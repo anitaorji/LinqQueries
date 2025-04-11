@@ -32,6 +32,7 @@ var highScorers = from s in students
 
 //Method Syntax (Filtering)
 var highScorers2 = students.Where(anyStudent => anyStudent.Score >= 80);
+//var nameSimba = students.Where(anyStudent => anyStudent.Name == "Simba").ToList().Last();
 foreach (var student in highScorers2)
 {
     Console.WriteLine($"{student.Name} scored {student.Score} ");
@@ -72,6 +73,16 @@ foreach (var name in allNames)
 foreach (var score in allScores)
 {
     Console.WriteLine($"{score}");
+}
+//Method Syntax (Grouping)
+var grouped = students.GroupBy(x => x.Name.StartsWith("L"));
+foreach (var group in  grouped)
+{
+    Console.WriteLine($"Is there any student's name that starts with 'L': {group.Key}");
+    foreach (var student in group)
+    {
+        Console.WriteLine($"student with name {student.Name} scored {student.Score}");
+    }
 }
 
 Console.ReadLine();
