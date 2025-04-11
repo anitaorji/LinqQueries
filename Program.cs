@@ -76,7 +76,7 @@ foreach (var score in allScores)
 }
 //Method Syntax (Grouping)
 var grouped = students.GroupBy(x => x.Name.StartsWith("L"));
-foreach (var group in  grouped)
+foreach (var group in grouped)
 {
     Console.WriteLine($"Is there any student's name that starts with 'L': {group.Key}");
     foreach (var student in group)
@@ -84,6 +84,50 @@ foreach (var group in  grouped)
         Console.WriteLine($"student with name {student.Name} scored {student.Score}");
     }
 }
+//Method Syntax(Aggregates)
+//Count
+var countOfStudents = students.Count();
+Console.WriteLine($"There are {countOfStudents} students in the list");
+
+//Sum
+var sumOfStudentsScores = students.Sum(x => x.Score);
+Console.WriteLine($"All the students scored a total of {sumOfStudentsScores} ");
+
+//Average
+var averageScore = students.Average(x => x.Score);
+Console.WriteLine($"The average Score is {averageScore}");
+
+//Min
+var minimumScore = students.Min(x => x.Score);
+Console.WriteLine($"The minimum score of students is {minimumScore}");
+
+//Max
+var maximumScore = students.Max(x => x.Score);
+Console.WriteLine($"The maximum score of the students is {maximumScore}");
+
+//Method Syntax(Search)
+/*try
+{
+    var topStudent = students.OrderByDescending(x => x.Score).First(x => x.Score > 75 && x.Score < 85);
+ Console.WriteLine($"The top Student is {topStudent.Name}, He/she scored {topStudent.Score}");
+}
+
+catch(Exception ex)
+{
+    Console.WriteLine("Could not find anybody");
+}*/
+
+var topStudent = students.OrderByDescending(x => x.Score).FirstOrDefault(x => x.Score > 75 && x.Score < 90);
+Console.WriteLine($"The top Student is {topStudent.Name}, He/she scored {topStudent.Score}");
+
+//Single:There should be only one item in the collection or list that meets this criteria
+//otherwise an exception should occur
+var studentFemi = students.Single(x => x.Name == "Femi");
+Console.WriteLine($"{studentFemi.Name} was found");
+
+//Any : True or False check for Something in the collection
+bool isAnyStudentBelow50 = students.Any(x => x.Score < 50);
+Console.WriteLine($"Was there anybody who scored less than 50? - {isAnyStudentBelow50}");
 
 Console.ReadLine();
 
